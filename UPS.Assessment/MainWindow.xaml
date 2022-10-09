@@ -5,8 +5,95 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UPS.Assessment"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800"
+        Loaded="Window_Loaded">
     <Grid>
+
+
+        <DataGrid x:Name="UsersDataGrid" 
+                  Margin="10,-50,10,50"
+                  AutoGenerateColumns="False"
+                  Grid.ColumnSpan="2"
+                  CanUserAddRows="false"
+                  MaxHeight="200"
+                  >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id"   Binding="{Binding Id}" Width="60" FontWeight="Bold" FontSize="16" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Name"  Binding="{Binding Name}" Width="*" FontSize="16" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Email"  Binding="{Binding Email}" Width="*" FontSize="16" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Gender" Binding="{Binding Gender}" Width="70" FontSize="16" IsReadOnly="True" />
+                <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="90" FontSize="16" IsReadOnly="True"/>
+                <DataGridTemplateColumn Header="Delete">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Click="DeleteUser_Click" Foreground="Red">X</Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Label Content="Name" HorizontalAlignment="Left" Margin="20,26,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="NameTextBox" HorizontalAlignment="Left"  Margin="60,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
+
+        <Label Content="Email" HorizontalAlignment="Left" Margin="190,26,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="EmailTextBox" HorizontalAlignment="Left" Margin="233,30,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="150"/>
+
+        <Label Content="Gender" HorizontalAlignment="Left" Margin="392,26,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="GenderComboBox"
+                  HorizontalAlignment="Left"
+                  IsEditable="True"
+                  IsReadOnly="True"
+                  Text="Select Gender" 
+                  Margin="442,30,0,0"
+                  VerticalAlignment="Top"
+                  Width="120">
+            <ComboBoxItem Content="male"/>
+            <ComboBoxItem Content="female"/>
+        </ComboBox>
+
+        <Label Content="Status" HorizontalAlignment="Left" Margin="605,26,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="StatusComboBox"
+                  HorizontalAlignment="Left" 
+                  IsEditable="True"
+                  IsReadOnly="True"
+                  Text="Select Status" 
+                  Margin="650,30,0,0"
+                  VerticalAlignment="Top"
+                  Width="120" >
+            <ComboBoxItem Content="active"/>
+            <ComboBoxItem Content="inactive"/>
+            <Button Content="Button"/>
+        </ComboBox>
+
+
+        <Button x:Name="SearchButton" 
+                Content="Search" HorizontalAlignment="Left"
+                Margin="20,320,0,0"
+                VerticalAlignment="Top" Width="163"
+                AutomationProperties.HelpText="Search" 
+                Click="SearchButton_Click"/>
+
+        <Button x:Name="ClearSearchButton" 
+                Content="Clear Search"
+                HorizontalAlignment="Left"
+                Margin="20,345,0,0" 
+                VerticalAlignment="Top" 
+                Click="ClearSearchButton_Click"/>
+
+
+        <Button x:Name="AddUser" 
+                Content="Add New User" HorizontalAlignment="Center"
+                Margin="0,315,0,0"
+                VerticalAlignment="Top" Width="164"
+                AutomationProperties.HelpText="Search" 
+                Click="AddUser_OnClick" Grid.Column="1"/>
+
+
+        <Button x:Name="PreviousPageButton" Content="Previous Page" HorizontalAlignment="Left" Margin="320,267,0,0" VerticalAlignment="Top" Click="PreviousPageButton_Click"/>
+        <TextBlock x:Name="PageNumberLabel" Text="{Binding PageNumber}"  HorizontalAlignment="Left" Margin="412,268,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.455,0.456"/>
+        <Button x:Name="NextPageButton" Content="Next Page" HorizontalAlignment="Left" Margin="440,267,0,0" VerticalAlignment="Top" Click="NextPageButton_Click" />
+
 
     </Grid>
 </Window>
