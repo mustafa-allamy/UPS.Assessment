@@ -1,0 +1,51 @@
+﻿<Window x:Class="UPS.Assessment.Windows.AddUserWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UPS.Assessment.Windows"
+        mc:Ignorable="d"
+        Title="AddUserWindows" Height="300" Width="400">
+
+    <Grid>
+        <Label Content="Name" HorizontalAlignment="Left" Margin="40,26,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="NameTextBox" HorizontalAlignment="Left"  Margin="100,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" />
+
+        <Label Content="Email" HorizontalAlignment="Left" Margin="40,68,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="EmailTextBox" HorizontalAlignment="Left" Margin="100,72,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="150"/>
+
+        <Label Content="Gender" HorizontalAlignment="Left" Margin="40,106,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="GenderComboBox"
+            HorizontalAlignment="Left"
+            IsEditable="True"
+            IsReadOnly="True"
+            Text="Select Gender" 
+            Margin="100,108,0,0"
+            VerticalAlignment="Top"
+            Width="120">
+            <ComboBoxItem Content="male"/>
+            <ComboBoxItem Content="female"/>
+        </ComboBox>
+
+
+        <Label Content="Status" HorizontalAlignment="Left" Margin="40,148,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="StatusComboBox"
+            HorizontalAlignment="Left" 
+            IsEditable="True"
+            IsReadOnly="True"
+            Text="Select Status" 
+            Margin="100,150,0,0"
+            VerticalAlignment="Top"
+            Width="120" >
+            <ComboBoxItem Content="active"/>
+            <ComboBoxItem Content="inactive"/>
+        </ComboBox>
+        <Button x:Name="SaveButton" Content="Save" 
+                HorizontalAlignment="Center"
+                Margin="0,217,0,0"
+                VerticalAlignment="Top"
+                Width="100" Click="SaveButton_Click" />
+
+
+    </Grid>
+</Window>

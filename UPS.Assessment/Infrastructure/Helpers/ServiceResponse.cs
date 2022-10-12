@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace UPS.Assessment.Infrastructure.Helpers;
 
-public class ServiceResponse : IServiceResponse
+public class ServiceResponse
 {
     private readonly List<IResponseError> _errors = new();
 
@@ -17,7 +17,6 @@ public class ServiceResponse : IServiceResponse
     public bool Succeeded { get; internal set; }
     public int ItemsCount { get; set; } = 1;
     public Exception Exception { get; set; }
-    public string MessageWithErrors => $"{string.Join(',', _errors)}";
     public bool IsPaginated => ItemsCount > 1;
     public void AddError(string errorMessage)
     {
@@ -33,9 +32,8 @@ public class ServiceResponse : IServiceResponse
     }
 }
 
-public class ServiceResponse<T> : ServiceResponse, IServiceResponse<T>
+public class ServiceResponse<T> : ServiceResponse
 {
-    public ServiceResponse() : base() { }
     public T? Data { get; internal set; }
     public void SetSuccessResponse(T value, string? msg = null)
     {

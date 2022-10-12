@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32516.85
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UPS.Assessment", "UPS.Assessment\UPS.Assessment.csproj", "{7415E125-DC9F-4FF7-B932-11A3054ABBAD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UPS.Assessment", "UPS.Assessment\UPS.Assessment.csproj", "{7415E125-DC9F-4FF7-B932-11A3054ABBAD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UPS.Assessment.UnitTests", "UPS.Assessment.UnitTests\UPS.Assessment.UnitTests.csproj", "{9EE274DA-25AA-419C-9860-FAB2A0BC6F85}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{7415E125-DC9F-4FF7-B932-11A3054ABBAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7415E125-DC9F-4FF7-B932-11A3054ABBAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7415E125-DC9F-4FF7-B932-11A3054ABBAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9EE274DA-25AA-419C-9860-FAB2A0BC6F85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EE274DA-25AA-419C-9860-FAB2A0BC6F85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EE274DA-25AA-419C-9860-FAB2A0BC6F85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EE274DA-25AA-419C-9860-FAB2A0BC6F85}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
