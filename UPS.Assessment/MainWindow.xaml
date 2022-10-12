@@ -63,7 +63,6 @@
                   Width="120" >
             <ComboBoxItem Content="active"/>
             <ComboBoxItem Content="inactive"/>
-            <Button Content="Button"/>
         </ComboBox>
 
 

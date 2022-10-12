@@ -28,7 +28,7 @@ namespace UPS.Assessment.Services
             return response;
         }
 
-        public async Task<HttpResponseMessage> Get(string method,string id, string token, string baseUrl)
+        public async Task<HttpResponseMessage> Get(string method, string id, string token, string baseUrl)
         {
             HttpClient httpClient = _clientFactory.CreateClient();
             httpClient.BaseAddress = new Uri(baseUrl);
@@ -54,7 +54,7 @@ namespace UPS.Assessment.Services
             return response;
         }
 
-        public async Task<HttpResponseMessage> Patch(string method,string id, string body, string? token, string baseUrl)
+        public async Task<HttpResponseMessage> Patch(string method, string id, string body, string? token, string baseUrl)
         {
             HttpClient httpClient = _clientFactory.CreateClient();
             httpClient.BaseAddress = new Uri(baseUrl);

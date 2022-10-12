@@ -2,7 +2,7 @@
 
 namespace UPS.Assessment.Infrastructure.Helpers;
 
-public class AbstractFactory<T>: IAbstractFactory<T>
+public class AbstractFactory<T> : IAbstractFactory<T>
 {
     private readonly Func<T> _factory;
 

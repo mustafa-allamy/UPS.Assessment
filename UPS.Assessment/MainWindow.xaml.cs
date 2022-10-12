@@ -1,14 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Diagnostics.Metrics;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using UPS.Assessment.Annotations;
 using UPS.Assessment.Common.Forms;
 using UPS.Assessment.Infrastructure.Helpers;
 using UPS.Assessment.Infrastructure.Interfaces.Services;
@@ -18,9 +14,7 @@ using UPS.Assessment.Windows;
 
 namespace UPS.Assessment
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
         private readonly IUserService _userService;
@@ -34,7 +28,7 @@ namespace UPS.Assessment
             set { _pageNumber = value; NotifyPropertyChanged(nameof(PageNumber)); }
         }
 
-        public MainWindow(IUserService userService,IAbstractFactory<AddUserWindow> userWindow)
+        public MainWindow(IUserService userService, IAbstractFactory<AddUserWindow> userWindow)
         {
             _userService = userService;
             _userWindow = userWindow;
@@ -46,7 +40,7 @@ namespace UPS.Assessment
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             var serviceResponse = await GetUsersServiceResponse(1);
-            
+
             users = new ObservableCollection<User>(serviceResponse.Data);
             _maxPage = serviceResponse.ItemsCount;
             UsersDataGrid.ItemsSource = users;
@@ -55,12 +49,14 @@ namespace UPS.Assessment
         private async void DeleteUser_Click(object sender, RoutedEventArgs e)
         {
             var obj = ((FrameworkElement)sender).DataContext as User;
-            if (MessageBox.Show($"Delete User: {obj.Name} ?", "Are you sure?", MessageBoxButton.YesNo,
-                    MessageBoxImage.Warning)==MessageBoxResult.Yes)
+            if (MessageBox.Show($"Delete User: {obj.Name} ?",
+                    "Are you sure?", MessageBoxButton.YesNo,
+                    MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
-                var serviceResponse=await _userService.DeleteUser(obj.Id);
-                if(serviceResponse.Failed)
-                    MessageBox.Show($"Could not delete user, reason:{string.Join(',',serviceResponse.Errors)}", "Error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                var serviceResponse = await _userService.DeleteUser(obj.Id);
+                if (serviceResponse.Failed)
+                    MessageBox.Show($"Could not delete user, reason:{string.Join(',', serviceResponse.Errors)}",
+                        "Error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
 
                 users.Remove(obj);
             }
@@ -69,13 +65,13 @@ namespace UPS.Assessment
         }
         private async void SearchButton_Click(object sender, RoutedEventArgs e)
         {
-            var serviceResponse = await GetUsersServiceResponse(1);
-
+            PageNumber = 1;
+            var serviceResponse = await GetUsersServiceResponse(_pageNumber);
             users = new ObservableCollection<User>(serviceResponse.Data);
             UsersDataGrid.ItemsSource = users;
         }
 
-       
+
 
         private async void ClearSearchButton_Click(object sender, RoutedEventArgs e)
         {
@@ -91,9 +87,9 @@ namespace UPS.Assessment
 
         private void AddUser_OnClick(object sender, RoutedEventArgs e)
         {
-            var addUserWindow=_userWindow.Create();
+            var addUserWindow = _userWindow.Create();
             addUserWindow.Show();
-            
+
         }
         private async void PreviousPageButton_Click(object sender, RoutedEventArgs e)
         {
@@ -103,7 +99,7 @@ namespace UPS.Assessment
             {
                 PageNumber--;
             }
-            var serviceResponse =await GetUsersServiceResponse(_pageNumber);
+            var serviceResponse = await GetUsersServiceResponse(_pageNumber);
             users = new ObservableCollection<User>(serviceResponse.Data);
             UsersDataGrid.ItemsSource = users;
         }
@@ -117,6 +113,7 @@ namespace UPS.Assessment
             }
             var serviceResponse = await GetUsersServiceResponse(_pageNumber);
             users = new ObservableCollection<User>(serviceResponse.Data);
+            _maxPage = serviceResponse.ItemsCount;
             UsersDataGrid.ItemsSource = users;
 
         }
@@ -135,8 +132,11 @@ namespace UPS.Assessment
             };
             var serviceResponse = await _userService.GetUsers(userSearchForm);
             if (serviceResponse.Failed)
-                MessageBox.Show("Could not load data", "Error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                MessageBox.Show("Could not load data", "Error",
+                    MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+            _maxPage = serviceResponse.ItemsCount;
             return serviceResponse;
+
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -150,6 +150,6 @@ namespace UPS.Assessment
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
 
-        
+
     }
 }
