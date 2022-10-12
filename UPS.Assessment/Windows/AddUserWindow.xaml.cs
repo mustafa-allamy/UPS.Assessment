@@ -2,17 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using UPS.Assessment.Common.Forms;
 using UPS.Assessment.Infrastructure.Interfaces.Services;
 
@@ -24,7 +15,7 @@ namespace UPS.Assessment.Windows
     public partial class AddUserWindow : Window
     {
         private readonly IUserService _userService;
-       
+
         public AddUserWindow(IUserService userService)
         {
             _userService = userService;
@@ -36,7 +27,7 @@ namespace UPS.Assessment.Windows
             ComboBoxItem genderSelectedItem = (ComboBoxItem)GenderComboBox.SelectedItem;
             ComboBoxItem statusSelectedItem = (ComboBoxItem)StatusComboBox.SelectedItem;
 
-            if(!ValidateInput(genderSelectedItem, statusSelectedItem))
+            if (!ValidateInput(genderSelectedItem, statusSelectedItem))
                 return;
 
             var createUserForm = new CreateUserForm()
@@ -47,10 +38,17 @@ namespace UPS.Assessment.Windows
                 status = statusSelectedItem.Content?.ToString()!
             };
 
-           var serviceResponse= await _userService.AddUser(createUserForm);
-           if(serviceResponse.Failed)
-               MessageBox.Show($"Failed to add user reason:{string.Join(',',serviceResponse.Errors)}", "Error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+            var serviceResponse = await _userService.AddUser(createUserForm);
+            if (serviceResponse.Failed)
+                MessageBox.Show($"Failed to add user reason:{string.Join(',', serviceResponse.Errors)}", 
+                    "Error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+            else
+            {
+                MessageBox.Show($"User added successfully", "Success",
+                    MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
+                this.Close();
 
+            }
 
 
         }
@@ -61,7 +59,7 @@ namespace UPS.Assessment.Windows
             if (string.IsNullOrWhiteSpace(NameTextBox.Text) || NameTextBox.Text.Length < 2)
                 Errors.Add("Please insert a valid name");
 
-            if (string.IsNullOrWhiteSpace(EmailTextBox.Text) || !MailAddress.TryCreate(EmailTextBox.Text,out var email))
+            if (string.IsNullOrWhiteSpace(EmailTextBox.Text) || !MailAddress.TryCreate(EmailTextBox.Text, out var email))
                 Errors.Add("Please insert a valid Email");
 
             if (genderSelectedItem?.Content is null)

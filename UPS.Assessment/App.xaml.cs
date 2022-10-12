@@ -1,10 +1,9 @@
-﻿using System;
-using System.IO;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+using System;
+using System.IO;
 using System.Windows;
-using Microsoft.Extensions.Configuration;
-using UPS.Assessment.Infrastructure.Helpers;
+using UPS.Assessment.Infrastructure.Extensions;
 using UPS.Assessment.Infrastructure.Interfaces.Services;
 using UPS.Assessment.Models;
 using UPS.Assessment.Services;
@@ -20,10 +19,8 @@ namespace UPS.Assessment
         public IServiceProvider ServiceProvider { get; private set; }
 
         public IConfiguration Configuration { get; private set; }
-        public static IHost AppHost { get; private set; }
 
-      
-      
+
         protected override async void OnStartup(StartupEventArgs e)
         {
             var builder = new ConfigurationBuilder()

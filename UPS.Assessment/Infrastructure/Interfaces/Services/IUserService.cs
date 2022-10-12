@@ -11,5 +11,5 @@ public interface IUserService
     Task<ServiceResponse<User>> GetUserById(int userId);
     Task<ServiceResponse<List<User>>> GetUsers(GetUsersForm form);
     Task<ServiceResponse<User>> AddUser(CreateUserForm form);
-    Task<ServiceResponse<bool>> DeleteUser(int userId);
+    Task<ServiceResponse> DeleteUser(int userId);
 }
